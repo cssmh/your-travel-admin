@@ -1,7 +1,6 @@
 import { Chart } from "react-google-charts";
 
 const Dashboard = () => {
-  // Sample data for Sales Report
   const salesReportData = [
     ["Month", "Total Sales", "Total Visitors", "Total Orders"],
     ["Jan", 100, 200, 300],
@@ -25,17 +24,31 @@ const Dashboard = () => {
     vAxis: {
       title: "Values",
       textStyle: { color: "#000" },
-      ticks: [100, 200, 300, 400, 500, 600, 700, 800], // Customize ticks
+      ticks: [100, 200, 300, 400, 500, 600, 700, 800],
     },
     colors: ["#000000", "#2ecc71", "#e0b0ff"],
     chartArea: { width: "80%", height: "70%" },
   };
 
+  const customerData = [
+    ["Customer Type", "Percentage"],
+    ["Active", 55],
+    ["New", 30],
+    ["Retarget", 15],
+  ];
+
+  const customerOptions = {
+    title: "Customer Breakdown",
+    pieHole: 0.4,
+    legend: { position: "bottom" },
+    colors: ["#3498db", "#2ecc71", "#e74c3c"],
+    chartArea: { width: "90%", height: "70%" },
+    pieSliceText: "percentage",
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      {/* Main Grid Layout */}
-      <div className="grid grid-cols-4 gap-6">
-        {/* First 8 smaller cards */}
+    <div className="min-h-screen p-8">
+      <div className="grid grid-cols-4 gap-4">
         {[
           "Draft",
           "Booking",
@@ -48,110 +61,123 @@ const Dashboard = () => {
         ].map((title, index) => (
           <div
             key={index}
-            className="bg-white rounded-lg shadow p-4 flex flex-col justify-between"
+            className="bg-white rounded-lg border shadow p-4 flex flex-col justify-between"
           >
             <div>
-              <h3 className="text-lg font-semibold">{title} 2023-2024</h3>
-              <p className="text-3xl font-bold mt-2">36,987</p>
-              <Chart
-                chartType="LineChart"
-                data={[
-                  ["Year", "Value"],
-                  ["2020", 100],
-                  ["2021", 200],
-                  ["2022", 300],
-                  ["2023", 400],
-                ]}
-                options={{
-                  legend: { position: "none" },
-                  hAxis: { textPosition: "none" },
-                  vAxis: { textPosition: "none" },
-                  colors: ["#6b5b95"],
-                  chartArea: { width: "80%", height: "60%" },
-                }}
-                width="100%"
-                height="100px"
-              />
+              <h3 className="flex justify-between items-center">
+                {title}
+                <span className="text-sm text-gray-500">2023-2024</span>
+              </h3>
+              <p className="text-2xl mt-2">36,987</p>
+              <div className="flex items-center mt-1">
+                <Chart
+                  chartType="LineChart"
+                  data={[
+                    ["Time", "Value"],
+                    ["Jan", 100],
+                    ["Feb", 200],
+                    ["Mar", 150],
+                    ["Apr", 250],
+                    ["May", 400],
+                    ["Jun", 300],
+                    ["Jul", 450],
+                  ]}
+                  options={{
+                    legend: { position: "none" },
+                    hAxis: {
+                      textPosition: "none",
+                      gridlines: { color: "transparent" },
+                    },
+                    vAxis: {
+                      textPosition: "none",
+                      gridlines: { color: "transparent" },
+                    },
+                    chartArea: { width: "80%", height: "50%" },
+                    colors: ["#1f1f1f"],
+                    pointSize: 6,
+                    lineWidth: 1,
+                    curveType: "none",
+                  }}
+                  width="100%"
+                  height="100px"
+                />
+              </div>
             </div>
-            <div className="flex justify-between items-center mt-4">
-              <p className="text-sm text-green-500">+20% since last year</p>
-              <button className="text-blue-500 hover:underline">
-                View Details
-              </button>
+            <div className="flex justify-between items-center mt-2">
+              <p className="text-sm">
+                <span className="text-gray-500">+20% </span>
+                Since Last Year
+              </p>
+              {index < 4 && <button className="text-sm">View Details</button>}
             </div>
           </div>
         ))}
       </div>
-
-      {/* Sales Report */}
       <div className="mt-6 grid grid-cols-4 gap-6">
-        <div className="col-span-3 bg-white rounded-lg shadow p-6">
+        <div className="col-span-3 bg-white border rounded-lg shadow p-6">
           <div className="flex justify-between items-center">
-            <h3 className="text-lg font-semibold">Sales Report </h3>
-
+            <h3 className="text-lg font-semibold">Sales Report</h3>
             <select
               className="border border-gray-300 rounded px-3 py-1 text-sm"
               defaultValue="Last 1 Year"
             >
               <option value="Last 1 Year">Last 1 Year</option>
-              <option value="Every Month">Every Month</option>
+              <option value="Jan - Jul">Jan - Jul</option>
             </select>
           </div>
-          {/* <p>
-            <span className="inline-flex items-center gap-2 ml-4">
-              <span className="h-3 w-3 bg-black rounded-full"></span>
-              <span className="text-sm">Total Sales</span>
-              <span className="h-3 w-3 bg-green-500 rounded-full"></span>
-              <span className="text-sm">Total Visitors</span>
-              <span className="h-3 w-3 bg-[#e0b0ff] rounded-full"></span>
-              <span className="text-sm">Total Orders</span>
-            </span>
-          </p> */}
           <Chart
-            chartType="LineChart"
+            chartType="ColumnChart"
             data={salesReportData}
             options={salesReportOptions}
             width="100%"
-            height="300px"
+            height="400px"
           />
         </div>
-
-        {/* Vertical Charts */}
         <div className="space-y-6">
-          <div className="bg-white rounded-lg shadow p-4">
-            <h3 className="text-lg font-semibold">Top Products</h3>
+          <div className="bg-white rounded-lg border shadow p-4">
+            <h3 className="text-lg font-semibold">Customer Breakdown</h3>
             <Chart
               chartType="PieChart"
-              data={[
-                ["Product", "Sales"],
-                ["Product A", 500],
-                ["Product B", 300],
-                ["Product C", 200],
-              ]}
-              options={{
-                legend: { position: "bottom" },
-                colors: ["#3498db", "#2ecc71", "#e74c3c"],
-              }}
+              data={customerData}
+              options={customerOptions}
               width="100%"
               height="200px"
             />
           </div>
-          <div className="bg-white rounded-lg shadow p-4">
-            <h3 className="text-lg font-semibold">Customer Growth</h3>
+          <div className="bg-white rounded-lg border shadow p-2">
+            <div className="flex justify-between items-center">
+              <h3 className="text-lg font-semibold">Real-Time Growth</h3>
+            </div>
             <Chart
-              chartType="BarChart"
+              chartType="AreaChart"
               data={[
                 ["Month", "Customers"],
                 ["Jan", 50],
-                ["Feb", 75],
-                ["Mar", 100],
+                ["Feb", 100],
+                ["Mar", 150],
+                ["Apr", 250],
+                ["May", 350],
+                ["Jun", 450],
               ]}
               options={{
-                legend: { position: "none" },
+                legend: { position: "top", alignment: "center" },
+                hAxis: {
+                  title: "Months",
+                  textStyle: { color: "#6b7280" },
+                  gridlines: { count: 6 },
+                },
+                vAxis: {
+                  title: "Customers",
+                  textStyle: { color: "#6b7280" },
+                  ticks: [50, 150, 250, 350, 450],
+                },
                 colors: ["#9b59b6"],
+                chartArea: { width: "85%", height: "70%" },
+                areaOpacity: 0.1,
+                lineWidth: 3,
               }}
               width="100%"
-              height="200px"
+              height="300px"
             />
           </div>
         </div>

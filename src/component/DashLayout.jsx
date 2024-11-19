@@ -25,7 +25,7 @@ const DashLayout = () => {
          <FaBell className="text-lg cursor-pointer" />
          <div className="flex items-center gap-2">
            <FaUserCircle className="text-2xl" />
-           <span>John Doe</span>
+           <span>Muneeb&apos;s</span>
          </div>
        </div>
      </div>
@@ -123,7 +123,7 @@ const DashLayout = () => {
            ))}
          </nav>
        </div>
-       <div className="flex-1 p-10">
+       <div className="flex-1 p-6">
          <Outlet />
        </div>
      </div>
