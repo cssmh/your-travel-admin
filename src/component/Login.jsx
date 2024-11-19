@@ -1,6 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
-import { FaRegHandPaper } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/atello.jpg"
+import { FaHandsClapping } from "react-icons/fa6";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,13 +16,13 @@ const Login = () => {
     <div className="min-h-screen flex">
       <div className="w-1/2 bg-[#2e231b] flex flex-col justify-center text-left text-white p-8">
         <img
-          src="https://via.placeholder.com/150"
+          src={logo}
           alt="Logo"
-          className="w-24 h-24 m-6"
+          className="w-24 h-24 m-6 mb-10 rounded-full"
         />
         <h1 className="text-4xl font-semibold mb-3 mx-5">Hello Atello</h1>
-        <p className="text-4xl font-semibold flex items-center mx-5">
-          to Welcome back! <FaRegHandPaper className="ml-2 text-yellow-300" />
+        <p className="text-4xl font-semibold flex items-center mx-5 mb-5">
+          to Welcome back! <FaHandsClapping className="ml-2 text-white" />
         </p>
         <p className="text-sm mt-2 opacity-80 mx-5">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae,
@@ -43,7 +44,7 @@ const Login = () => {
           <p className="text-gray-400">
             It&lsquo;s FREE! Takes less than a minute.
           </p>
-          <form onSubmit={handleSubmit} className="space-y-4 p-8">
+          <form onSubmit={handleSubmit} className="space-y-4 px-8 pt-8 pb-3">
             <div>
               <label
                 htmlFor="email"
@@ -81,7 +82,7 @@ const Login = () => {
               Login Now
             </button>
           </form>
-          <button className="border mt-4 w-full flex items-center justify-center gap-2 py-2 rounded-lg transition">
+          <button className="border w-full flex items-center justify-center gap-2 py-2 rounded-lg transition">
             <FcGoogle className="text-xl" />
             Login with Google
           </button>
